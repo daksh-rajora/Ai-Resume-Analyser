@@ -1,0 +1,12 @@
+{
+  "name": "ai-resume-analyser-root",
+  "version": "1.0.0",
+  "private": true,
+  "description": "AI Resume Analyser root configuration for monorepo deployments",
+  "scripts": {
+    "build": "npm install --prefix backend",
+    "start": "npm start --prefix backend",
+    "dev:backend": "npm run dev --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend"
+  }
+}

@@ -1,8 +1,17 @@
-
 import axios from "axios";
 
+const LIVE_RENDER_API = "https://ai-resume-analyser-zabq.onrender.com/api";
+
+function resolveBaseUrl() {
+  const envUrl = import.meta.env.VITE_API_URL;
+  if (envUrl) {
+    return envUrl.endsWith("/api") ? envUrl : `${envUrl.replace(/\/+$/, "")}/api`;
+  }
+  return import.meta.env.DEV ? "/api" : LIVE_RENDER_API;
+}
+
 export const apiClient = axios.create({
-  baseURL: "/api",
+  baseURL: resolveBaseUrl(),
   withCredentials: true,
   headers: { "Content-Type": "application/json" },
 });
@@ -22,5 +31,3 @@ apiClient.interceptors.response.use(
     });
   }
 );
-
-
