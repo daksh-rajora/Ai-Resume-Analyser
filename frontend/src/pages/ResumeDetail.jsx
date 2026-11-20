@@ -146,7 +146,7 @@ export default function ResumeDetail() {
           <div className="space-y-2">
             <CardTitle className="text-base">Run analysis</CardTitle>
             <CardDescription>
-              Score this version with Gemini and get issues, strengths, and rewrites.
+              Score this version with AI and get issues, strengths, and rewrites.
             </CardDescription>
             <VersionSwitcher
               versions={versions}

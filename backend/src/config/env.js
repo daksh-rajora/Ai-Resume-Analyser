@@ -23,7 +23,9 @@ module.exports = {
     .split(",")
     .map((o) => o.trim())
     .filter(Boolean),
-    geminiApiKey: process.env.GEMINI_API_KEY || "",
-    geminiModel: process.env.GEMINI_MODEL || "gemini-2.5-flash",
+    openrouterApiKey: process.env.OPENROUTER_API_KEY || process.env.GEMINI_API_KEY || "",
+    openrouterModel: process.env.OPENROUTER_MODEL || process.env.GEMINI_MODEL || "nvidia/nemotron-3-ultra-550b-a55b:free",
+    geminiApiKey: process.env.OPENROUTER_API_KEY || process.env.GEMINI_API_KEY || "",
+    geminiModel: process.env.OPENROUTER_MODEL || process.env.GEMINI_MODEL || "nvidia/nemotron-3-ultra-550b-a55b:free",
     isProd: process.env.NODE_ENV === "production"
 }
