@@ -127,7 +127,7 @@ export default function ResumeDetail() {
             : ""
         }
         actions={
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <Button variant="ghost" onClick={() => nav("/resumes")}>
               <ArrowLeft size={14} /> All resumes
             </Button>
@@ -142,8 +142,8 @@ export default function ResumeDetail() {
       />
 
       <Card>
-        <div className="flex flex-wrap items-end gap-4 justify-between">
-          <div className="space-y-2">
+        <div className="flex flex-col md:flex-row md:items-end gap-4 justify-between">
+          <div className="space-y-2 min-w-0 w-full md:w-auto">
             <CardTitle className="text-base">Run analysis</CardTitle>
             <CardDescription>
               Score this version with AI and get issues, strengths, and rewrites.
@@ -154,18 +154,19 @@ export default function ResumeDetail() {
               onChange={setActiveVersionId}
             />
           </div>
-          <div className="flex items-center gap-3 flex-1 min-w-[280px] max-w-[520px]">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full md:flex-1 md:max-w-[520px]">
             <Input
               placeholder="Target role (optional, e.g. Senior Frontend Engineer)"
               value={targetRole}
               onChange={(e) => setTargetRole(e.target.value)}
+              className="w-full"
             />
             <Button
               variant="accent"
               size="lg"
               onClick={runAnalyze}
               disabled={analyze.isPending || !activeVersionId}
-              className="shrink-0"
+              className="shrink-0 w-full sm:w-auto min-h-[44px] justify-center"
             >
               {analyze.isPending ? (
                 <>
@@ -180,7 +181,7 @@ export default function ResumeDetail() {
           </div>
         </div>
         {analyze.error && (
-          <div className="mt-4 text-xs text-[var(--danger)] bg-[#F8E3E0] rounded-xl px-3 py-2">
+          <div className="mt-4 text-xs text-[var(--danger)] bg-[#F8E3E0] rounded-xl px-3 py-2 break-words">
             {analyze.error.message}
           </div>
         )}
@@ -203,7 +204,7 @@ export default function ResumeDetail() {
 
       {analysis && (
         <>
-          <div className="grid grid-cols-1 lg:grid-cols-12 gap-5">
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-4 sm:gap-5 min-w-0">
             <div className="lg:col-span-4">
               <AtsGauge score={analysis.atsScore} delta={0} />
             </div>
@@ -298,18 +299,18 @@ function ParsedSectionsPreview({ version }) {
   const b = s.basics || {};
 
   return (
-    <div className="space-y-4 text-sm">
+    <div className="space-y-4 text-sm break-words">
       {(b.name || b.title || b.email) && (
         <div className="pb-4 border-b border-[var(--border)]">
           {b.name && (
-            <div className="font-display text-lg font-semibold tracking-tight text-[var(--ink)]">
+            <div className="font-display text-lg font-semibold tracking-tight text-[var(--ink)] break-words">
               {b.name}
             </div>
           )}
           {b.title && (
-            <div className="text-[var(--accent-strong)] text-sm">{b.title}</div>
+            <div className="text-[var(--accent-strong)] text-sm break-words">{b.title}</div>
           )}
-          <div className="text-xs text-[var(--ink-muted)] mt-1 flex flex-wrap gap-x-3 gap-y-1">
+          <div className="text-xs text-[var(--ink-muted)] mt-1 flex flex-wrap gap-x-3 gap-y-1 break-words">
             {b.email && <span>{b.email}</span>}
             {b.phone && <span>{b.phone}</span>}
             {b.location && <span>{b.location}</span>}

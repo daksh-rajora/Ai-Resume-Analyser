@@ -37,7 +37,7 @@ export function ScoreBreakdown({ breakdown }) {
           </RadarChart>
         </ResponsiveContainer>
       </div>
-      <div className="grid grid-cols-4 gap-2 mt-3 pt-3 border-t border-[var(--border)]">
+      <div className="grid grid-cols-2 sm:grid-cols-4 gap-2 sm:gap-3 mt-3 pt-3 border-t border-[var(--border)]">
         {data.map((d) => (
           <div key={d.axis} className="text-center">
             <div className="text-[10px] uppercase tracking-wide text-[var(--ink-muted)]">

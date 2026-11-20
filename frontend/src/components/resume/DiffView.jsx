@@ -30,35 +30,37 @@ function GradientNumber({ value, size = 32, palette = "sage" }) {
 
 function VersionPicker({ versions, value, onChange, exclude }) {
   return (
-    <div className="inline-flex items-center gap-0.5 bg-[var(--surface)] border border-[var(--border)] p-0.5 rounded-full shadow-card">
-      {versions.map((v) => {
-        const active = value === v._id;
-        const disabled = v._id === exclude;
-        return (
-          <button
-            key={v._id}
-            onClick={() => onChange(v._id)}
-            disabled={disabled}
-            className={cn(
-              "h-7 px-3 text-[11px] font-semibold rounded-full transition-all tabular-nums",
-              active
-                ? "text-white shadow-card"
-                : "text-[var(--ink-muted)] hover:text-[var(--ink)]",
-              disabled && "opacity-30 cursor-not-allowed"
-            )}
-            style={
-              active
-                ? {
-                    background:
-                      "linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%)",
-                  }
-                : undefined
-            }
-          >
-            {v.label}
-          </button>
-        );
-      })}
+    <div className="max-w-full overflow-x-auto scrollbar-none py-0.5">
+      <div className="inline-flex items-center gap-0.5 bg-[var(--surface)] border border-[var(--border)] p-0.5 rounded-full shadow-card shrink-0">
+        {versions.map((v) => {
+          const active = value === v._id;
+          const disabled = v._id === exclude;
+          return (
+            <button
+              key={v._id}
+              onClick={() => onChange(v._id)}
+              disabled={disabled}
+              className={cn(
+                "h-7 px-3 text-[11px] font-semibold rounded-full transition-all tabular-nums shrink-0 whitespace-nowrap",
+                active
+                  ? "text-white shadow-card"
+                  : "text-[var(--ink-muted)] hover:text-[var(--ink)]",
+                disabled && "opacity-30 cursor-not-allowed"
+              )}
+              style={
+                active
+                  ? {
+                      background:
+                        "linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%)",
+                    }
+                  : undefined
+              }
+            >
+              {v.label}
+            </button>
+          );
+        })}
+      </div>
     </div>
   );
 }
@@ -126,7 +128,7 @@ export function DiffView({ resumeId, versions }) {
       </CardHeader>
 
       {/* Compare bar */}
-      <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface-2)]/60 p-3 mb-5 flex items-center justify-center gap-3 flex-wrap">
+      <div className="rounded-2xl border border-[var(--border)] bg-[var(--surface-2)]/60 p-2.5 sm:p-3 mb-4 sm:mb-5 flex items-center justify-center gap-2 sm:gap-3 flex-wrap">
         <span className="text-[10px] uppercase tracking-wider font-semibold text-[var(--ink-muted)]">
           From
         </span>
@@ -193,19 +195,19 @@ export function DiffView({ resumeId, versions }) {
               />
             </svg>
 
-            <div className="relative flex items-end gap-8 flex-wrap">
+            <div className="relative flex items-center sm:items-end gap-4 sm:gap-8 flex-wrap justify-between sm:justify-start">
               <div>
                 <div className="text-[10px] uppercase tracking-wider font-semibold text-[var(--ink-muted)]">
                   Added
                 </div>
                 <div className="flex items-baseline gap-1.5 mt-1.5">
-                  <GradientNumber value={`+${data.stats.added}`} size={40} />
+                  <GradientNumber value={`+${data.stats.added}`} size={36} />
                   <span className="text-[11px] text-[var(--ink-muted)]">
                     chars
                   </span>
                 </div>
               </div>
-              <div className="h-10 w-px bg-[var(--border)]" />
+              <div className="h-10 w-px bg-[var(--border)] hidden sm:block" />
               <div>
                 <div className="text-[10px] uppercase tracking-wider font-semibold text-[var(--ink-muted)]">
                   Removed
@@ -213,7 +215,7 @@ export function DiffView({ resumeId, versions }) {
                 <div className="flex items-baseline gap-1.5 mt-1.5">
                   <GradientNumber
                     value={`−${data.stats.removed}`}
-                    size={40}
+                    size={36}
                     palette="danger"
                   />
                   <span className="text-[11px] text-[var(--ink-muted)]">
@@ -221,7 +223,7 @@ export function DiffView({ resumeId, versions }) {
                   </span>
                 </div>
               </div>
-              <div className="h-10 w-px bg-[var(--border)]" />
+              <div className="h-10 w-px bg-[var(--border)] hidden sm:block" />
               <div>
                 <div className="text-[10px] uppercase tracking-wider font-semibold text-[var(--ink-muted)]">
                   Net change
@@ -229,7 +231,7 @@ export function DiffView({ resumeId, versions }) {
                 <div className="flex items-baseline gap-1.5 mt-1.5">
                   <span
                     className={cn(
-                      "font-display tabular-nums text-[26px] font-semibold leading-none tracking-tight",
+                      "font-display tabular-nums text-[24px] sm:text-[26px] font-semibold leading-none tracking-tight",
                       net > 0
                         ? "text-[var(--accent-strong)]"
                         : net < 0
@@ -245,11 +247,11 @@ export function DiffView({ resumeId, versions }) {
                   </span>
                 </div>
               </div>
-              <div className="ml-auto text-right">
+              <div className="w-full sm:w-auto sm:ml-auto text-left sm:text-right pt-2 sm:pt-0 border-t sm:border-t-0 border-[var(--border)]">
                 <div className="text-[10px] uppercase tracking-wider font-semibold text-[var(--ink-muted)]">
                   Comparing
                 </div>
-                <div className="mt-1.5 inline-flex items-center gap-1.5 text-[12px] font-semibold text-[var(--ink)] tabular-nums">
+                <div className="mt-1 inline-flex items-center gap-1.5 text-[12px] font-semibold text-[var(--ink)] tabular-nums">
                   {fromLabel}
                   <ArrowRight
                     size={11}
@@ -279,7 +281,7 @@ export function DiffView({ resumeId, versions }) {
                 </span>
               </div>
             </div>
-            <div className="p-5 max-h-[600px] overflow-auto font-mono text-[13px] leading-[1.75] whitespace-pre-wrap text-[var(--ink-muted)]">
+            <div className="p-3.5 sm:p-5 max-h-[600px] overflow-auto font-mono text-[12px] sm:text-[13px] leading-[1.75] whitespace-pre-wrap break-words break-all text-[var(--ink-muted)]">
               {data.parts.map((p, i) => (
                 <span
                   key={i}

@@ -98,7 +98,7 @@ export function AtsGauge({ score = 0, delta = 0 }) {
             <div className="text-[10px] uppercase tracking-[0.16em] text-[var(--ink-muted)] font-semibold">
               ATS Score
             </div>
-            <div className="font-display tabular text-[60px] font-semibold tracking-tight text-[var(--ink)] leading-none mt-1.5">
+            <div className="font-display tabular text-[clamp(42px,12vw,60px)] font-semibold tracking-tight text-[var(--ink)] leading-none mt-1 sm:mt-1.5">
               {animated}
             </div>
             <div className="text-[11px] text-[var(--ink-muted)] mt-1">

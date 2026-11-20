@@ -105,7 +105,7 @@ export function StatCard({
         </div>
 
         {hasData && (
-          <div className="w-[110px] shrink-0 self-end opacity-90">
+          <div className="w-[85px] sm:w-[110px] shrink-0 self-end opacity-90">
             <ChartCmp data={data} color={color} />
           </div>
         )}

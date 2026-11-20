@@ -28,7 +28,7 @@ export function ProfileCard({ user, stats }) {
         <div className="font-display text-lg font-semibold tracking-tight text-[var(--ink)]">
           {user?.name || "Ravi Teja"}
         </div>
-        <div className="text-xs text-[var(--ink-muted)] mt-0.5">
+        <div className="text-xs text-[var(--ink-muted)] mt-0.5 truncate max-w-[220px]">
           {user?.email || "you@example.com"}
         </div>
         <Badge tone="accent" className="mt-2">
@@ -56,7 +56,7 @@ export function ProfileCard({ user, stats }) {
             variant="outline"
             size="sm"
             onClick={() => nav("/resumes")}
-            className="w-full"
+            className="w-full min-h-[38px] sm:min-h-[32px]"
           >
             <Upload size={13} /> Upload
           </Button>
@@ -64,7 +64,7 @@ export function ProfileCard({ user, stats }) {
             variant="outline"
             size="sm"
             onClick={() => nav("/insights")}
-            className="w-full"
+            className="w-full min-h-[38px] sm:min-h-[32px]"
           >
             <BarChart3 size={13} /> Insights
           </Button>

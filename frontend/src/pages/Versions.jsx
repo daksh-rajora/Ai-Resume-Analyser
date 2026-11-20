@@ -59,28 +59,30 @@ export default function Versions() {
         description="Every iteration across every resume, in one place."
       />
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
         <TotalCard label="Total versions" value={totals.all} icon={Layers} />
         <TotalCard label="Uploads" value={totals.uploads} icon={FileText} />
         <TotalCard label="Rewrites" value={totals.rewrites} icon={PenLine} accent />
       </div>
 
       <div className="flex items-center justify-between gap-3 flex-wrap">
-        <div className="inline-flex items-center gap-1 bg-[var(--surface)] border border-[var(--border)] p-1 rounded-full shadow-card">
-          {FILTERS.map((f) => (
-            <button
-              key={f.key}
-              onClick={() => setFilter(f.key)}
-              className={cn(
-                "h-8 px-3.5 text-xs font-medium rounded-full transition-colors",
-                filter === f.key
-                  ? "bg-[var(--ink)] text-[var(--bg)]"
-                  : "text-[var(--ink-muted)] hover:text-[var(--ink)]"
-              )}
-            >
-              {f.label}
-            </button>
-          ))}
+        <div className="w-full sm:w-auto overflow-x-auto scrollbar-none py-1">
+          <div className="inline-flex items-center gap-1 bg-[var(--surface)] border border-[var(--border)] p-1 rounded-full shadow-card shrink-0">
+            {FILTERS.map((f) => (
+              <button
+                key={f.key}
+                onClick={() => setFilter(f.key)}
+                className={cn(
+                  "h-8 px-3.5 text-xs font-medium rounded-full transition-colors shrink-0 whitespace-nowrap",
+                  filter === f.key
+                    ? "bg-[var(--ink)] text-[var(--bg)]"
+                    : "text-[var(--ink-muted)] hover:text-[var(--ink)]"
+                )}
+              >
+                {f.label}
+              </button>
+            ))}
+          </div>
         </div>
 
         <SearchInput
@@ -120,10 +122,10 @@ export default function Versions() {
 function VersionRow({ version, onClick }) {
   const isUpload = version.sourceType === "upload";
   return (
-    <Card onClick={onClick} className="cursor-pointer flex items-center gap-4">
+    <Card onClick={onClick} className="cursor-pointer flex items-center gap-3 sm:gap-4 p-3.5 sm:p-5">
       <div
         className={cn(
-          "h-12 w-12 rounded-2xl flex items-center justify-center shrink-0",
+          "h-10 w-10 sm:h-12 sm:w-12 rounded-2xl flex items-center justify-center shrink-0",
           isUpload
             ? "bg-[var(--surface-2)] text-[var(--ink-muted)]"
             : "bg-[var(--accent-soft)] text-[var(--accent-strong)]"
@@ -133,37 +135,38 @@ function VersionRow({ version, onClick }) {
       </div>
 
       <div className="flex-1 min-w-0">
-        <div className="flex items-center gap-2 flex-wrap">
-          <span className="font-display text-base font-semibold tabular">
+        <div className="flex items-center gap-1.5 sm:gap-2 flex-wrap">
+          <span className="font-display text-sm sm:text-base font-semibold tabular">
             {version.label}
           </span>
-          <span className="text-[var(--ink-muted)] text-sm truncate">
+          <span className="text-[var(--ink-muted)] text-xs sm:text-sm truncate">
             {version.resumeTitle}
           </span>
         </div>
-        <div className="text-xs text-[var(--ink-muted)] mt-0.5">
-          {isUpload ? "Uploaded" : "Rewritten"} {relativeTime(version.createdAt)}
+        <div className="text-[11px] sm:text-xs text-[var(--ink-muted)] mt-0.5 flex items-center gap-1.5">
+          <span>{isUpload ? "Uploaded" : "Rewritten"} {relativeTime(version.createdAt)}</span>
+          <span className="sm:hidden capitalize">· {version.sourceType}</span>
         </div>
       </div>
 
       {version.score != null ? (
         <div className="text-right shrink-0">
-          <div className="font-display tabular text-xl font-semibold">
+          <div className="font-display tabular text-lg sm:text-xl font-semibold">
             {version.score}
           </div>
-          <div className="text-[10px] uppercase tracking-wide text-[var(--ink-muted)]">
+          <div className="text-[9px] sm:text-[10px] uppercase tracking-wide text-[var(--ink-muted)]">
             ATS
           </div>
         </div>
       ) : (
-        <Badge tone="neutral">No score</Badge>
+        <Badge tone="neutral" className="text-[10px] sm:text-xs">No score</Badge>
       )}
 
-      <Badge tone={isUpload ? "neutral" : "accent"} className="capitalize">
+      <Badge tone={isUpload ? "neutral" : "accent"} className="capitalize hidden sm:inline-flex shrink-0">
         {version.sourceType}
       </Badge>
 
-      <ChevronRight size={16} className="text-[var(--ink-muted)]" />
+      <ChevronRight size={16} className="text-[var(--ink-muted)] shrink-0" />
     </Card>
   );
 }

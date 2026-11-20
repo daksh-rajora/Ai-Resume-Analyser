@@ -89,7 +89,7 @@ export function NotificationsPopover() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: -4, scale: 0.98 }}
             transition={{ duration: 0.18, ease: [0.16, 1, 0.3, 1] }}
-            className="absolute right-0 top-[52px] z-40 w-[380px] rounded-3xl bg-[var(--surface)] border border-[var(--border)] shadow-hover overflow-hidden"
+            className="absolute right-0 top-[52px] z-40 w-[calc(100vw-32px)] sm:w-[380px] max-w-[380px] rounded-3xl bg-[var(--surface)] border border-[var(--border)] shadow-hover overflow-hidden"
             role="dialog"
             aria-label="Notifications"
           >

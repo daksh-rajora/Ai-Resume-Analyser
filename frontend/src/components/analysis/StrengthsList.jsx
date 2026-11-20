@@ -13,7 +13,7 @@ export function StrengthsList({ strengths }) {
         </div>
         <Badge tone="success">{strengths.length}</Badge>
       </CardHeader>
-      <div className="space-y-7">
+      <div className="space-y-4 sm:space-y-7">
         {strengths.map((s, i) => (
           <div key={i} className="flex items-start gap-3">
             <div className="shrink-0 w-8 flex items-start justify-center pt-0.5">
@@ -33,8 +33,8 @@ export function StrengthsList({ strengths }) {
               </span>
             </div>
             <div className="flex-1 min-w-0">
-              <div className="font-medium text-sm text-[var(--ink)]">{s.title}</div>
-              <div className="text-xs text-[var(--ink-muted)] mt-0.5">{s.evidence}</div>
+              <div className="font-medium text-sm text-[var(--ink)] break-words">{s.title}</div>
+              <div className="text-xs text-[var(--ink-muted)] mt-0.5 break-words">{s.evidence}</div>
             </div>
           </div>
         ))}

@@ -94,37 +94,39 @@ export default function History() {
         description="Everything you've done across your resumes, in time order."
       />
 
-      <div className="inline-flex items-center gap-1 bg-[var(--surface)] border border-[var(--border)] p-1 rounded-full shadow-card">
-        {FILTERS.map((f) => {
-          const Icon = f.icon;
-          const count = totals[f.key] ?? events.length;
-          const isActive = filter === f.key;
-          return (
-            <button
-              key={f.key}
-              onClick={() => setFilter(f.key)}
-              className={cn(
-                "h-9 px-3.5 text-xs font-medium rounded-full transition-colors inline-flex items-center gap-1.5",
-                isActive
-                  ? "bg-[var(--ink)] text-[var(--bg)]"
-                  : "text-[var(--ink-muted)] hover:text-[var(--ink)]"
-              )}
-            >
-              <Icon size={13} />
-              {f.label}
-              <span
+      <div className="w-full max-w-full overflow-x-auto scrollbar-none py-1">
+        <div className="inline-flex items-center gap-1 bg-[var(--surface)] border border-[var(--border)] p-1 rounded-full shadow-card shrink-0">
+          {FILTERS.map((f) => {
+            const Icon = f.icon;
+            const count = totals[f.key] ?? events.length;
+            const isActive = filter === f.key;
+            return (
+              <button
+                key={f.key}
+                onClick={() => setFilter(f.key)}
                 className={cn(
-                  "tabular text-[10px] px-1.5 py-0.5 rounded-full",
+                  "h-9 px-3.5 text-xs font-medium rounded-full transition-colors inline-flex items-center gap-1.5 shrink-0 whitespace-nowrap",
                   isActive
-                    ? "bg-white/15 text-[var(--bg)]"
-                    : "bg-[var(--surface-2)] text-[var(--ink-muted)]"
+                    ? "bg-[var(--ink)] text-[var(--bg)]"
+                    : "text-[var(--ink-muted)] hover:text-[var(--ink)]"
                 )}
               >
-                {count}
-              </span>
-            </button>
-          );
-        })}
+                <Icon size={13} />
+                {f.label}
+                <span
+                  className={cn(
+                    "tabular text-[10px] px-1.5 py-0.5 rounded-full",
+                    isActive
+                      ? "bg-white/15 text-[var(--bg)]"
+                      : "bg-[var(--surface-2)] text-[var(--ink-muted)]"
+                  )}
+                >
+                  {count}
+                </span>
+              </button>
+            );
+          })}
+        </div>
       </div>
 
       {grouped.length === 0 ? (
@@ -160,7 +162,7 @@ export default function History() {
                         e.resumeId && nav(`/resumes/${e.resumeId}`)
                       }
                       className={cn(
-                        "w-full text-left flex items-start gap-3 px-5 py-3.5 hover:bg-[var(--surface-2)] transition-colors",
+                        "w-full text-left flex items-start gap-2.5 sm:gap-3 px-3.5 sm:px-5 py-3 sm:py-3.5 hover:bg-[var(--surface-2)] transition-colors",
                         idx > 0 && "border-t border-[var(--border)]"
                       )}
                     >

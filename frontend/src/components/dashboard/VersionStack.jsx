@@ -40,7 +40,7 @@ function VersionPill({ version, delta, isLatest }) {
       animate={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.4, ease: [0.16, 1, 0.3, 1] }}
       className={cn(
-        "flex-1 min-w-[120px] rounded-2xl p-4 border transition-shadow",
+        "flex-1 min-w-[110px] sm:min-w-[120px] rounded-2xl p-3 sm:p-4 border transition-shadow shrink-0",
         isLatest
           ? "bg-[var(--accent-soft)] border-[var(--accent)]/30 shadow-card"
           : "bg-[var(--surface-2)] border-[var(--border)]"
@@ -216,7 +216,7 @@ export function VersionStack({ versions, resumeId, resumeTitle }) {
 
       <div className="grid grid-cols-1 lg:grid-cols-[1fr_220px] gap-5 items-stretch">
         {/* Version progression */}
-        <div className="flex items-center gap-2 sm:gap-3">
+        <div className="flex items-center gap-2 sm:gap-3 overflow-x-auto scrollbar-none pb-2 max-w-full">
           {visible.map((v, i) => {
             const prev = visible[i - 1];
             const delta = prev ? v.score - prev.score : null;

@@ -63,7 +63,7 @@ export function UploadDropzone({ onUploaded, compact = false }) {
           {...getRootProps()}
           className={cn(
             "rounded-3xl border border-dashed cursor-pointer transition-all duration-200 outline-none",
-            compact ? "p-6" : "p-10",
+            compact ? "p-4 sm:p-6" : "p-5 sm:p-10",
             isDragActive
               ? "border-[var(--accent)] bg-[var(--accent-soft)]"
               : "border-[var(--border)] bg-[var(--surface-2)] hover:border-[var(--accent)]/40 hover:bg-[var(--accent-soft)]/40",

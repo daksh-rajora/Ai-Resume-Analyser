@@ -72,7 +72,7 @@ export default function Export() {
         title={`Export — ${resume?.title || "Resume"}`}
         description="Preview a clean ATS-friendly PDF and download when it looks right."
         actions={
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             <Button variant="ghost" onClick={() => nav(`/resumes/${id}`)}>
               <ArrowLeft size={14} /> Back to resume
             </Button>
@@ -88,7 +88,7 @@ export default function Export() {
               Choose which version to export
             </CardDescription>
           </div>
-          <div className="flex items-center gap-3 flex-wrap">
+          <div className="flex flex-col sm:flex-row items-stretch sm:items-center gap-2.5 sm:gap-3 w-full sm:w-auto">
             <VersionSwitcher
               versions={versions}
               activeId={activeVersionId}
@@ -100,7 +100,7 @@ export default function Export() {
                 fileName={fileName}
               >
                 {({ loading }) => (
-                  <Button variant="accent" size="md" disabled={loading}>
+                  <Button variant="accent" size="md" disabled={loading} className="w-full sm:w-auto justify-center">
                     {loading ? (
                       <>
                         <Loader2 size={14} className="animate-spin" /> Preparing…

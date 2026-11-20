@@ -18,9 +18,9 @@ const cardVariants = cva(
       },
       padding: {
         none: "",
-        sm: "p-4",
-        md: "p-5",
-        lg: "p-6",
+        sm: "p-3 sm:p-4",
+        md: "p-3.5 sm:p-5",
+        lg: "p-4 sm:p-6",
       },
     },
     defaultVariants: { variant: "default", radius: "md", padding: "md" },
@@ -39,13 +39,19 @@ export const Card = forwardRef(
 Card.displayName = "Card";
 
 export const CardHeader = ({ className, ...props }) => (
-  <div className={cn("flex items-start justify-between gap-3 mb-4", className)} {...props} />
+  <div
+    className={cn(
+      "flex flex-wrap sm:flex-nowrap items-start justify-between gap-2.5 sm:gap-3 mb-3 sm:mb-4 min-w-0",
+      className
+    )}
+    {...props}
+  />
 );
 
 export const CardTitle = ({ className, ...props }) => (
   <h3
     className={cn(
-      "text-sm font-semibold text-[var(--ink)] tracking-tight",
+      "text-sm font-semibold text-[var(--ink)] tracking-tight break-words",
       className
     )}
     {...props}
@@ -53,7 +59,7 @@ export const CardTitle = ({ className, ...props }) => (
 );
 
 export const CardDescription = ({ className, ...props }) => (
-  <p className={cn("text-xs text-[var(--ink-muted)]", className)} {...props} />
+  <p className={cn("text-xs text-[var(--ink-muted)] break-words", className)} {...props} />
 );
 
 export const CardContent = ({ className, ...props }) => (

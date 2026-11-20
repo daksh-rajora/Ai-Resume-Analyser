@@ -14,13 +14,15 @@ export function Tabs({ value, onValueChange, children, className }) {
 
 export function TabsList({ children, className }) {
   return (
-    <div
-      className={cn(
-        "inline-flex items-center gap-1 bg-[var(--surface-2)] border border-[var(--border)] p-1 rounded-full",
-        className
-      )}
-    >
-      {children}
+    <div className="w-full max-w-full overflow-x-auto scrollbar-none py-1">
+      <div
+        className={cn(
+          "inline-flex items-center gap-1 bg-[var(--surface-2)] border border-[var(--border)] p-1 rounded-full shrink-0",
+          className
+        )}
+      >
+        {children}
+      </div>
     </div>
   );
 }
@@ -30,9 +32,10 @@ export function TabsTrigger({ value, children, className }) {
   const active = ctx.value === value;
   return (
     <button
+      type="button"
       onClick={() => ctx.onValueChange(value)}
       className={cn(
-        "relative px-3.5 h-8 text-xs font-medium rounded-full transition-colors",
+        "relative px-3 sm:px-3.5 h-8 text-xs font-medium rounded-full transition-colors shrink-0 whitespace-nowrap",
         active ? "text-[var(--bg)]" : "text-[var(--ink-muted)] hover:text-[var(--ink)]",
         className
       )}

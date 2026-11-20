@@ -113,8 +113,8 @@ export function BulletRewrites({ rewrites, onApply, isApplying, error }) {
           />
         </svg>
 
-        <div className="relative flex items-end justify-between gap-6 flex-wrap">
-          <div className="flex items-end gap-8">
+        <div className="relative flex flex-col sm:flex-row sm:items-end justify-between gap-4 sm:gap-6">
+          <div className="flex items-end gap-5 sm:gap-8 flex-wrap">
             <div>
               <div className="text-[10px] uppercase tracking-wider font-semibold text-[var(--ink-muted)]">
                 AI rewrites
@@ -142,8 +142,13 @@ export function BulletRewrites({ rewrites, onApply, isApplying, error }) {
             </div>
           </div>
 
-          <div className="flex items-center gap-2 flex-wrap">
-            <Button variant="outline" size="sm" onClick={toggleAll}>
+          <div className="flex items-center gap-2 flex-wrap w-full sm:w-auto">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={toggleAll}
+              className="flex-1 sm:flex-none min-h-[38px] sm:min-h-[32px]"
+            >
               {allSelected ? "Clear all" : "Select all"}
             </Button>
             <Button
@@ -151,6 +156,7 @@ export function BulletRewrites({ rewrites, onApply, isApplying, error }) {
               size="sm"
               onClick={applySelected}
               disabled={!someSelected || isApplying}
+              className="flex-1 sm:flex-none min-h-[38px] sm:min-h-[32px]"
             >
               {isApplying ? (
                 <Loader2 size={13} className="animate-spin" />
@@ -160,7 +166,7 @@ export function BulletRewrites({ rewrites, onApply, isApplying, error }) {
               Apply selected
             </Button>
             <div
-              className="rounded-full p-[1.5px]"
+              className="w-full sm:w-auto rounded-full p-[1.5px]"
               style={{
                 background:
                   "linear-gradient(135deg, #B6CFC0 0%, var(--accent) 45%, var(--accent-strong) 100%)",
@@ -171,7 +177,7 @@ export function BulletRewrites({ rewrites, onApply, isApplying, error }) {
                 size="sm"
                 onClick={applyAll}
                 disabled={isApplying}
-                className="!rounded-full"
+                className="!rounded-full w-full sm:w-auto min-h-[38px] sm:min-h-[32px] justify-center"
               >
                 <Wand2 size={13} />
                 Apply all → new version
@@ -196,7 +202,7 @@ export function BulletRewrites({ rewrites, onApply, isApplying, error }) {
               )}
             >
               {/* Header row: number + section + selection state */}
-              <div className="flex items-center justify-between mb-4">
+              <div className="flex flex-wrap sm:flex-nowrap items-center justify-between gap-2 mb-4">
                 <div className="flex items-center gap-3">
                   <div className="w-9 flex items-center justify-center">
                     <GradientNumber
@@ -227,21 +233,21 @@ export function BulletRewrites({ rewrites, onApply, isApplying, error }) {
 
               {/* Before / arrow / After */}
               <div className="grid grid-cols-1 md:grid-cols-[1fr_36px_1fr] gap-3 items-stretch">
-                <div className="relative rounded-xl bg-[var(--surface-2)]/70 p-4 border border-[var(--border)]">
+                <div className="relative rounded-xl bg-[var(--surface-2)]/70 p-3.5 sm:p-4 border border-[var(--border)] min-w-0">
                   <div className="flex items-center gap-1.5 mb-1.5">
                     <span className="h-1.5 w-1.5 rounded-full bg-[var(--ink-muted)]/50" />
                     <div className="text-[10px] uppercase tracking-wider font-semibold text-[var(--ink-muted)]">
                       Original
                     </div>
                   </div>
-                  <div className="text-[13.5px] text-[var(--ink-muted)] leading-relaxed line-through decoration-[var(--ink-muted)]/30">
+                  <div className="text-[13.5px] text-[var(--ink-muted)] leading-relaxed line-through decoration-[var(--ink-muted)]/30 break-words">
                     {r.original}
                   </div>
                 </div>
 
-                <div className="flex items-center justify-center py-2 md:py-0">
+                <div className="flex items-center justify-center py-1 md:py-0">
                   <div
-                    className="h-9 w-9 rounded-full flex items-center justify-center text-white shadow-card"
+                    className="h-8 w-8 md:h-9 md:w-9 rounded-full flex items-center justify-center text-white shadow-card rotate-90 md:rotate-0"
                     style={{
                       background:
                         "linear-gradient(135deg, var(--accent) 0%, var(--accent-strong) 100%)",
@@ -252,7 +258,7 @@ export function BulletRewrites({ rewrites, onApply, isApplying, error }) {
                 </div>
 
                 <div
-                  className="relative rounded-xl p-4 border"
+                  className="relative rounded-xl p-3.5 sm:p-4 border min-w-0"
                   style={{
                     background:
                       "linear-gradient(135deg, var(--accent-soft) 0%, var(--surface) 100%)",
@@ -270,7 +276,7 @@ export function BulletRewrites({ rewrites, onApply, isApplying, error }) {
                       Rewritten
                     </div>
                   </div>
-                  <div className="text-[13.5px] text-[var(--ink)] leading-relaxed font-medium">
+                  <div className="text-[13.5px] text-[var(--ink)] leading-relaxed font-medium break-words">
                     {r.rewritten}
                   </div>
                 </div>
@@ -282,7 +288,7 @@ export function BulletRewrites({ rewrites, onApply, isApplying, error }) {
                   <span className="h-5 w-5 rounded-md bg-[var(--accent-soft)] text-[var(--accent-strong)] flex items-center justify-center shrink-0 mt-0.5">
                     <Info size={10} strokeWidth={2.5} />
                   </span>
-                  <div className="text-[12px] text-[var(--ink-muted)] leading-relaxed">
+                  <div className="text-[12px] text-[var(--ink-muted)] leading-relaxed break-words">
                     <span className="font-semibold text-[var(--ink)]">
                       Why this works ·{" "}
                     </span>
@@ -296,7 +302,7 @@ export function BulletRewrites({ rewrites, onApply, isApplying, error }) {
       </div>
 
       {error && (
-        <div className="mt-4 text-xs text-[var(--danger)] bg-[#F8E3E0] rounded-xl px-3 py-2">
+        <div className="mt-4 text-xs text-[var(--danger)] bg-[#F8E3E0] rounded-xl px-3 py-2 break-words">
           {error}
         </div>
       )}

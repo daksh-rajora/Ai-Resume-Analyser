@@ -83,7 +83,7 @@ export default function Insights() {
       />
 
       {/* KPI row */}
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-5">
+      <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-5">
         <Kpi
           label="Average ATS Score"
           value={data.averageScore}
@@ -167,7 +167,7 @@ export default function Insights() {
       </Card>
 
       {/* Issues + Missing Keywords */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-5">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5">
         <Card>
           <CardHeader>
             <div>
@@ -268,7 +268,7 @@ export default function Insights() {
           </div>
         </CardHeader>
         <div className="overflow-x-auto -mx-2">
-          <table className="w-full text-sm">
+          <table className="w-full text-sm min-w-[500px]">
             <thead>
               <tr className="text-left text-[10px] uppercase tracking-wide text-[var(--ink-muted)] border-b border-[var(--border)]">
                 <th className="px-2 py-2 font-medium">Resume</th>

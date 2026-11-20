@@ -3,6 +3,7 @@ import { Outlet, useLocation } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 import { Sidebar } from "./Sidebar";
 import { Topbar } from "./Topbar";
+import { MobileNav } from "./MobileNav";
 import { CommandPalette } from "./CommandPalette";
 
 export function AppShell() {
@@ -34,9 +35,9 @@ export function AppShell() {
   }, [location.pathname]);
 
   return (
-    <div className="min-h-screen flex bg-[var(--bg)]">
+    <div className="min-h-screen flex bg-[var(--bg)] min-w-0 overflow-x-hidden">
       <Sidebar />
-      <main className="flex-1 px-6 md:px-8 py-6 max-w-[1600px] mx-auto w-full">
+      <main className="flex-1 px-3.5 sm:px-6 md:px-8 py-4 sm:py-6 max-w-[1600px] mx-auto w-full min-w-0 overflow-x-hidden pb-20 md:pb-6">
         <Topbar onOpenPalette={openPalette} />
         <AnimatePresence mode="wait">
           <motion.div
@@ -50,6 +51,7 @@ export function AppShell() {
           </motion.div>
         </AnimatePresence>
       </main>
+      <MobileNav />
       <CommandPalette open={paletteOpen} onClose={closePalette} />
     </div>
   );

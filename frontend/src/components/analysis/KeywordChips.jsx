@@ -4,20 +4,20 @@ import { Card, CardHeader, CardTitle, CardDescription } from "@/components/ui/Ca
 function Chip({ children, tone }) {
   if (tone === "present") {
     return (
-      <span className="inline-flex items-center gap-1.5 h-7 pl-1.5 pr-3 rounded-full bg-[var(--accent-soft)] text-[var(--accent-strong)] text-[12px] font-semibold transition-transform hover:-translate-y-px">
-        <span className="h-4 w-4 rounded-full bg-[var(--accent-strong)] text-white flex items-center justify-center">
+      <span className="inline-flex items-center gap-1.5 h-7 pl-1.5 pr-3 rounded-full bg-[var(--accent-soft)] text-[var(--accent-strong)] text-[12px] font-semibold transition-transform hover:-translate-y-px max-w-full">
+        <span className="h-4 w-4 rounded-full bg-[var(--accent-strong)] text-white flex items-center justify-center shrink-0">
           <Check size={9} strokeWidth={3.5} />
         </span>
-        {children}
+        <span className="truncate max-w-[240px]">{children}</span>
       </span>
     );
   }
   return (
-    <span className="inline-flex items-center gap-1.5 h-7 pl-1.5 pr-3 rounded-full bg-[#F8E3E0]/70 text-[var(--danger)] text-[12px] font-semibold transition-transform hover:-translate-y-px">
-      <span className="h-4 w-4 rounded-full bg-[var(--danger)] text-white flex items-center justify-center">
+    <span className="inline-flex items-center gap-1.5 h-7 pl-1.5 pr-3 rounded-full bg-[#F8E3E0]/70 text-[var(--danger)] text-[12px] font-semibold transition-transform hover:-translate-y-px max-w-full">
+      <span className="h-4 w-4 rounded-full bg-[var(--danger)] text-white flex items-center justify-center shrink-0">
         <X size={9} strokeWidth={3.5} />
       </span>
-      {children}
+      <span className="truncate max-w-[240px]">{children}</span>
     </span>
   );
 }
@@ -87,7 +87,7 @@ export function KeywordChips({ present = [], missing = [] }) {
           />
         </svg>
 
-        <div className="relative flex items-end justify-between gap-4">
+        <div className="relative flex items-end justify-between gap-3 sm:gap-4 flex-wrap">
           <div>
             <div className="text-[10px] uppercase tracking-wider font-semibold text-[var(--ink-muted)]">
               Match rate

@@ -162,7 +162,7 @@ export function CommandPalette({ open, onClose }) {
     <AnimatePresence>
       {open && (
         <motion.div
-          className="fixed inset-0 z-50 flex items-start justify-center pt-[14vh] px-4"
+          className="fixed inset-0 z-50 flex items-start justify-center pt-[8vh] sm:pt-[14vh] px-3 sm:px-4"
           initial={{ opacity: 0 }}
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
@@ -226,8 +226,8 @@ export function CommandPalette({ open, onClose }) {
               )}
             </div>
 
-            <div className="flex items-center justify-between px-5 h-10 border-t border-[var(--border)] bg-[var(--surface-2)]/60 text-[11px] text-[var(--ink-muted)]">
-              <div className="flex items-center gap-3">
+            <div className="flex items-center justify-between px-3 sm:px-5 h-10 border-t border-[var(--border)] bg-[var(--surface-2)]/60 text-[11px] text-[var(--ink-muted)]">
+              <div className="hidden sm:flex items-center gap-3">
                 <span className="flex items-center gap-1">
                   <kbd className="px-1.5 h-5 rounded bg-[var(--surface)] border border-[var(--border)] inline-flex items-center">↑</kbd>
                   <kbd className="px-1.5 h-5 rounded bg-[var(--surface)] border border-[var(--border)] inline-flex items-center">↓</kbd>
