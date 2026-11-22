@@ -7,7 +7,7 @@ An end-to-end, full-stack AI-powered resume analyzer, ATS scoring engine, and ve
 ## 🚀 Live Deployments
 
 - **Frontend (Vercel):** Single Page Application with full mobile responsiveness and client-side routing.
-- **Backend API (Render):** `https://ai-resume-analyser-zabq.onrender.com/api`
+- **Backend API (Render):** `https://ai-resume-analyser-9wae.onrender.com/api`
 
 ---
 
@@ -173,7 +173,7 @@ Visit `http://localhost:5173` in your browser.
 2. Framework Preset: **Vite**.
 3. Root Directory: `frontend`.
 4. Environment Variables:
-   - `VITE_API_URL`: `https://ai-resume-analyser-zabq.onrender.com/api` (your backend URL).
+   - `VITE_API_URL`: `https://ai-resume-analyser-9wae.onrender.com/api` (your backend URL).
 5. Deploy! Client-side routes are automatically handled by `vercel.json`.
 
 ---

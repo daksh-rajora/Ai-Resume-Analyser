@@ -1,6 +1,6 @@
 import axios from "axios";
 
-const LIVE_RENDER_API = "https://ai-resume-analyser-zabq.onrender.com/api";
+const LIVE_RENDER_API = "https://ai-resume-analyser-9wae.onrender.com/api";
 
 function resolveBaseUrl() {
   const envUrl = import.meta.env.VITE_API_URL;
