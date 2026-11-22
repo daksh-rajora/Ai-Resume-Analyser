@@ -25,15 +25,21 @@ export function AuthProvider({ children }) {
   }, [refresh]);
 
   const login = useCallback(async (credentials) => {
-    const { user } = await authApi.login(credentials);
-    setUser(user);
-    return user;
+    const data = await authApi.login(credentials);
+    if (data?.token) {
+      localStorage.setItem("arr_token", data.token);
+    }
+    setUser(data.user);
+    return data.user;
   }, []);
 
   const register = useCallback(async (payload) => {
-    const { user } = await authApi.register(payload);
-    setUser(user);
-    return user;
+    const data = await authApi.register(payload);
+    if (data?.token) {
+      localStorage.setItem("arr_token", data.token);
+    }
+    setUser(data.user);
+    return data.user;
   }, []);
 
   const updateProfile = useCallback(async (payload) => {
@@ -46,6 +52,7 @@ export function AuthProvider({ children }) {
     try {
       await authApi.logout();
     } finally {
+      localStorage.removeItem("arr_token");
       setUser(null);
       queryClient.clear();
     }

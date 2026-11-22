@@ -4,7 +4,7 @@ const { z } = require("zod");
 const env = require("../config/env");
 const asyncHandler = require("../utils/asyncHandler");
 const ApiError = require("../utils/ApiError");
-const { signToken, cookieOptions } = require("../utils/jwt");
+const { signToken, cookieOptions, getCookieOptions } = require("../utils/jwt");
 const { validate } = require("../middleware/validate");
 const { requireAuth } = require("../middleware/auth");
 const { authLimiter } = require("../middleware/rateLimit");
@@ -32,51 +32,54 @@ const passwordSchema = z.object({
     newPassword: z.string().min(8).max(128)
 })
 
-function issueSession(res,user){
-    const token = signToken({sub: user._id.toString()})
-    res.cookie(env.cookieName,token, cookieOptions)
+function issueSession(res, user) {
+    const token = signToken({ sub: user._id.toString() });
+    const opts = getCookieOptions(res.req);
+    res.cookie(env.cookieName, token, opts);
+    return token;
 }
 
 router.post(
     "/register",
     authLimiter,
     validate(registerSchema),
-    asyncHandler(async (req,res) => {
-        const {name, email, password} = req.body;
+    asyncHandler(async (req, res) => {
+        const { name, email, password } = req.body;
 
-        const existing = await User.findOne({email});
-        if(existing) throw ApiError.conflict("Email already registered")
+        const existing = await User.findOne({ email });
+        if (existing) throw ApiError.conflict("Email already registered");
 
         const passwordHash = await User.hashPassword(password);
-        const user = await User.create({name, email, passwordHash});
+        const user = await User.create({ name, email, passwordHash });
 
-        issueSession(res,user);
-        res.status(201).json({user})
+        const token = issueSession(res, user);
+        res.status(201).json({ user, token });
     })
-)
+);
 
 router.post(
     "/login",
     authLimiter,
     validate(loginSchema),
-    asyncHandler(async (req,res) => {
-        const {email,password} = req.body;
+    asyncHandler(async (req, res) => {
+        const { email, password } = req.body;
 
         const user = await User.findOne({ email }).select("+passwordHash");
-        if(!user) throw ApiError.unauthorized("Invalid credentials");
+        if (!user) throw ApiError.unauthorized("Invalid credentials");
 
         const ok = await user.comparePassword(password);
         if (!ok) throw ApiError.unauthorized("Invalid credentials");
 
-        issueSession(res,user);
-        res.json({user})
+        const token = issueSession(res, user);
+        res.json({ user, token });
     })
-)
+);
 
-router.post("/logout",(req,res)=>{
-    res.clearCookie(env.cookieName, {...cookieOptions,maxAge:0});
-    res.json({ok:true})
-})
+router.post("/logout", (req, res) => {
+    const opts = getCookieOptions(req);
+    res.clearCookie(env.cookieName, { ...opts, maxAge: 0 });
+    res.json({ ok: true });
+});
 
 router.get(
     "/me",

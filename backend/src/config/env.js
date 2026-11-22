@@ -1,7 +1,8 @@
 const dotenv = require("dotenv");
 const path = require("path");
 
-dotenv.config({path: path.resolve(__dirname,"../../.env")})
+dotenv.config({ path: path.resolve(__dirname, "../../.env") });
+dotenv.config({ path: path.resolve(__dirname, "../../../.env") });
 
 const required = ["MONGO_URI","JWT_SECRET"];
 const missing = required.filter((key) => !process.env[key]);
@@ -18,7 +19,7 @@ module.exports = {
     jwtExpiresIn: process.env.JWT_EXPIRES_IN || "7d",
     cookieName: process.env.COOKIE_NAME || "arr_token",
     clientOrigins: (
-        process.env.CLIENT_ORIGIN || "http://localhost:5173,http://localhost:5174"
+        process.env.CLIENT_ORIGIN || "https://ai-resume-psi-flame.vercel.app,http://localhost:5173,http://localhost:5174"
     )
     .split(",")
     .map((o) => o.trim())

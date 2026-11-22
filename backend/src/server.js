@@ -17,13 +17,39 @@ const historyRouter = require("./routes/history")
 
 const app = express()
 
-app.set("trust proxy",1);
-app.use(
-    cors({
-        origin: true, // reflect request origin = allows everything while keeping credentials working
-        credentials: true,
-    })
-)
+app.set("trust proxy", 1);
+
+const allowedOrigins = [
+    "https://ai-resume-psi-flame.vercel.app",
+    "http://localhost:5173",
+    "http://localhost:5174",
+    ...(Array.isArray(env.clientOrigins) ? env.clientOrigins : []),
+];
+
+const corsOptions = {
+    origin: (origin, callback) => {
+        // Allow requests with no origin (e.g. mobile apps, curl, Postman, server-to-server)
+        if (!origin) return callback(null, true);
+
+        const isExplicitlyAllowed =
+            allowedOrigins.includes(origin) ||
+            /^https:\/\/.*\.vercel\.app$/.test(origin);
+
+        if (isExplicitlyAllowed) {
+            return callback(null, true);
+        }
+        // Fallback: reflect request origin so custom domains or other previews are not blocked
+        return callback(null, true);
+    },
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization", "X-Requested-With", "Accept"],
+    exposedHeaders: ["Set-Cookie"],
+    optionsSuccessStatus: 204,
+    maxAge: 86400,
+};
+
+app.use(cors(corsOptions));
 
 app.use(express.json({limit:"1mb"}));
 app.use(express.urlencoded({extended: true, limit:"1mb"}));

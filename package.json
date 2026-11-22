@@ -4,6 +4,7 @@
   "private": true,
   "description": "AI Resume Analyser root configuration for monorepo deployments",
   "scripts": {
+    "postinstall": "npm install --prefix backend",
     "build": "npm install --prefix backend",
     "start": "npm start --prefix backend",
     "dev:backend": "npm run dev --prefix backend",
