@@ -1,8 +1,7 @@
 const dotenv = require("dotenv");
 const path = require("path");
 
-dotenv.config({ path: path.resolve(__dirname, "../../.env") });
-dotenv.config({ path: path.resolve(__dirname, "../../../.env") });
+dotenv.config({path: path.resolve(__dirname,"../../.env")})
 
 const required = ["MONGO_URI","JWT_SECRET"];
 const missing = required.filter((key) => !process.env[key]);
